@@ -10,7 +10,15 @@ or Termometro).
 
 The Main function uses Activator.CreateInstance in order to get the corresponding instance of the class to be injected.
 ```C#
-Type type = System.Type.GetType("CodeInjection.Barometro");
-IMeteoReferencia dependency = (IMeteoReferencia)Activator.CreateInstance(type);
-estacion.referencia = dependency;
+static void Main(string[] args)
+{
+    var estacion = new EstacionMeteorologica();
+
+    Type type = System.Type.GetType("CodeInjection.Barometro");
+    IMeteoReferencia dependency = (IMeteoReferencia)Activator.CreateInstance(type);
+    estacion.referencia = dependency;
+
+    Console.WriteLine(estacion.MostrarDatos());
+
+}
 ```
