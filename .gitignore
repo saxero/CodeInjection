@@ -1,0 +1,7 @@
+bin/Debug/netcoreapp2.0/ci.dll
+bin/Debug/netcoreapp2.0/ci.pdb
+obj/ci.csproj.nuget.cache
+obj/ci.csproj.nuget.g.props
+obj/ci.csproj.nuget.g.targets
+obj/Debug/netcoreapp2.0/ci.dll
+obj/Debug/netcoreapp2.0/ci.pdb
