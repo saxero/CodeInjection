@@ -1,20 +1,27 @@
 using System;
 
 namespace CodeInjection{
+    /// <summary>
+    /// Main class - starting point.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
             var estacion = new EstacionMeteorologica();
+            
             Type type = System.Type.GetType("CodeInjection.Barometro");
-            IMeteoReferencia dependency = (IMeteoReferencia)Activator.CreateInstance(type);
-            estacion._referencia = dependency;
+            IMeteoReferencia dependency = Activator.CreateInstance(type);
+            estacion.referencia = dependency;
             
             Console.WriteLine(estacion.MostrarDatos());
 
         }
     }
 
+    /// <summary>
+    /// Barometro class. Implements IMetroReferencia <see langword="interface"/>
+    /// </summary>
     public class Barometro: IMeteoReferencia
     {
         public int Valor {
@@ -26,6 +33,11 @@ namespace CodeInjection{
             return "Barometro valor: " + Valor.ToString();
         }
     }
+
+
+    /// <summary>
+    /// Anemometro class. Implements IMetroReferencia <see langword="interface"/>
+    /// </summary>
     public class Anemometro: IMeteoReferencia
     {
         public int Valor {
@@ -38,6 +50,9 @@ namespace CodeInjection{
         }
     }
 
+    /// <summary>
+    /// Termometro class. Implements IMetroReferencia <see langword="interface"/>
+    /// </summary>
     public class Termometro: IMeteoReferencia
     {
         public int Valor {
@@ -50,11 +65,14 @@ namespace CodeInjection{
         }
     }
 
+    /// <summary>
+    /// Class EstacionMeteorologica allows dependency injection of IMeteoReferencia dependency by setter.
+    /// </summary>
     public class EstacionMeteorologica{
-        public IMeteoReferencia _referencia;
+        public IMeteoReferencia referencia;
 
         public String MostrarDatos(){
-            return _referencia.Mostrar();
+            return referencia.Mostrar();
         }
     }
 }
